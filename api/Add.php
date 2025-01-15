@@ -13,7 +13,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("Add contact info");
+		$stmt = $conn->prepare("INSERT into Colors (UserId,Name) VALUES(?,?)");
 		$stmt->bind_param("ss", $phoneNumber, $email, $firstName, $lastName);
 		$stmt->execute();
 		$stmt->close();
