@@ -5,8 +5,166 @@
     <meta name="viewport" content="width=`, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./output.css">
-</head>
-<body>
     
+</head>
+<body class = "bg-slate-300">
+    <nav class="bg-gray-800">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div class="relative flex h-16 items-center justify-between">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <!-- Mobile menu button-->
+              <button
+                type="button"
+                class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span class="absolute -inset-0.5"></span>
+                <span class="sr-only">Open main menu</span>
+                <!-- Icon when menu is closed.-->
+                <svg
+                  class="block w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  data-slot="icon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+                <!-- Icon when menu is open.-->
+                <svg
+                  class="hidden w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  data-slot="icon"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+            >
+              <div class="flex shrink-0 items-center">
+                <a href="./index.html">
+                  <img
+                    class="h-8 w-auto"
+                    src="./imgs/loafIcon.webp"
+                    alt="Your Company"
+                  />
+                </a>
+              </div>
+              <div class="hidden sm:block sm:ml-6">
+                <div class="flex space-x-4">
+                  <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                  <a
+                    href="./loginSignUp.html"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    aria-current="page"
+                    >Logout</a
+                  >
+                  <a
+                    href="https://github.com/mmamdouh4370/G17-SmallProject"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    >Contacts</a
+                  >
+                  <a
+                    href="https://github.com/mmamdouh4370/G17-SmallProject"
+                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    >Github</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="sm:hidden" id="mobile-menu">
+          <div class="space-y-1 px-2 pb-3 pt-2">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a
+              href="./loginSignUp.html"
+              class="block rounded-md hover:bg-gray-700 px-3 py-2 text-base font-medium text-gray-300 hover:text-white"
+              aria-current="page"
+              >Logout</a
+            >
+            <a
+              href="https://github.com/mmamdouh4370/G17-SmallProject"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Contacts</a
+            >
+            <a
+              href="https://github.com/mmamdouh4370/G17-SmallProject"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              >Github</a
+            >
+          </div>
+        </div>
+    </nav>
+
+      
+        <form class = "flex justify-center items-center h-56">        
+          <input class = "text-center w-96 rounded-lg h-11" type="search" placeholder="Search Name">
+        </form>
+        
+        <div class = "h-96 border-gray-400 border-2">
+          <div class="container mx-auto p-4">
+            <table class="min-w-full border-collapse border border-gray-700">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="border-2 border-gray-700 px-4 py-2 text-left">First Name</th>
+                  <th class="border-2 border-gray-700 px-4 py-2 text-left">Last Name</th>
+                  <th class="border-2 border-gray-700 px-4 py-2 text-left">Email</th>
+                  <th class="border-2 border-gray-700 px-4 py-2 text-left">Phone Number</th>
+                </tr>
+              </thead>
+              <tbody id="contactTableBody">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class = "flex justify-center">
+          <div class="mt-1 p-4 border border-gray-300 bg-slate-400 rounded shadow-lg">
+            <h2 class="text-lg font-bold mb-4">Add New Contact</h2>
+            <form id="addContactForm" class="grid gap-4">
+              <div>
+                <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                <input id="firstName" type="text" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" required>
+              </div>
+              <div>
+                <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input id="lastName" type="text" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" required>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="email" type="email" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" required>
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input id="phone" type="text" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" required>
+              </div>
+              <button id = "addContactButton" type="submit" class="bg-blue-500 w-80 text-white px-4 py-2 rounded shadow hover:bg-blue-600">
+                Add Contact
+              </button>
+            </form>
+          </div>
+        </div>
+        
 </body>
+<script src="./contactManage.js"></script>
 </html>
