@@ -1,10 +1,6 @@
 const urlBase = 'http://159.223.165.192/G17-SmallProject/LAMPAPI';
 const ext = 'php';
 
-let userId = 0;
-let firstName = "";
-let lastName = "";
-
 function toggleForm(){
   const createAccountForm = document.getElementById("create-account-form");
   const loginForm = document.getElementById("login-form");
@@ -31,9 +27,6 @@ function toggleForm(){
 
 function login(event){
     event.preventDefault();
-    userId = 0;
-	firstName = "";
-	lastName = "";
 
     let fullUrl = urlBase + "/Login." + ext;
     let login = document.getElementById("loginUser").value;
@@ -42,35 +35,85 @@ function login(event){
     let preJson = { login: login, password: pass };
 	let jsonPayload = JSON.stringify(preJson);
     
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", fullUrl, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    try {
-        xhr.onreadystatechange = function (){
-            if (this.readyState == 4 && this.status == 200) {
 
-                let jsonObject = JSON.parse(xhr.responseText);
-                console.log(jsonObject);
-                userId = jsonObject.id;
+    fetch(fullUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonPayload,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Login Incorrect');
+        }
+        return response.json();
+    })
+    .then(jsonObject => {
+        let userId = jsonObject.id;
+        
+        if (userId < 1) {
+            document.getElementById("loginResult").innerHTML = "Login Incorrect";
+            return;
+        }
+        
+        let firstName = jsonObject.firstName;
+        let lastName = jsonObject.lastName;
 
-                if (userId < 1) {
-                    document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
-                    return;
-                }
-                firstName = jsonObject.firstName;
-                lastName = jsonObject.lastName;
+        let minutes = 20;
+        let date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+    
+        document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 
-                saveCookie();
-                window.location.href = "contacts.html";
-            }
-        };
-
-        xhr.send(jsonPayload);
-    } catch (err) {
-        document.getElementById("loginResult").innerHTML = err.message;
-    }
+        window.location.href = "contacts.html";
+    })
+    .catch(error => {
+        document.getElementById("loginResult").innerHTML = error.message;
+    });
 }
 
-function register(){
+function register(event){
+    event.preventDefault();
+    userId = 0;
+	firstName = "";
+	lastName = "";
 
+    let fullUrl = urlBase + "/Register." + ext;
+    
+    firstName = document.getElementById("regFName").value;
+    let lastName = document.getElementById("regLName").value;
+    let login = document.getElementById("regUser").value;
+	let pass = document.getElementById("regPass").value;
+
+    let preJson = { firstName: firstName, lastName: lastName, login: login, password: pass };
+	let jsonPayload = JSON.stringify(preJson);
+    
+
+    fetch(fullUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonPayload,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Registration Failed');
+        }
+        console.log(response.json())
+        return response.json();
+    })
+    .then(jsonObject => {
+        let minutes = 20;
+        let date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+    
+        document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+
+        window.location.href = "contacts.html";
+    })
+    .catch(error => {
+        document.getElementById("loginResult").innerHTML = error.message;
+    });
 }
