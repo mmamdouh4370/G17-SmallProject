@@ -5,52 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Social Loafers</title>
     <link rel="stylesheet" href="./output.css" />
-    <style>
-      /* Add transition effects */
-      .form-container {
-        position: relative;
-        opacity: 1;
-        transition: opacity 0.5s ease, transform 0.5s ease;
-      }
-
-      .form-container.hidden {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      .form-container.active {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    </style>
-    <script>
-      function toggleForm() {
-        const createAccountForm = document.getElementById(
-          "create-account-form"
-        );
-        const loginForm = document.getElementById("login-form");
-        const toggleButton = document.getElementById("toggle-button");
-
-        // Toggle form visibility with animation
-        if (createAccountForm.classList.contains("active")) {
-          createAccountForm.classList.remove("active");
-          createAccountForm.classList.add("hidden");
-
-          loginForm.classList.remove("hidden");
-          loginForm.classList.add("active");
-
-          toggleButton.innerText = "Don't have an account? Create one";
-        } else {
-          loginForm.classList.remove("active");
-          loginForm.classList.add("hidden");
-
-          createAccountForm.classList.remove("hidden");
-          createAccountForm.classList.add("active");
-
-          toggleButton.innerText = "Already have an account? Login";
-        }
-      }
-    </script>
   </head>
   <body class="bg-slate-300">
     <nav class="bg-gray-800">
@@ -201,13 +155,14 @@
         <form
           id="login-form"
           class="form-container space-y-4 hidden mb-[11.25rem]"
-          onSubmit=""
+          onSubmit="login(event)"
         >
           <h2 class="text-xl font-medium mb-8">Login to Your Account</h2>
           <div class="space-y-1">
             <label class="block text-lg text-gray-600"> Username </label>
             <input
               type="text"
+              id="loginUser"
               class="w-full px-3 py-2 border border-gray-200 rounded text-gray-800 text-md"
               placeholder="Enter your username"
             />
@@ -217,6 +172,7 @@
             <label class="block text-lg text-gray-600"> Password </label>
             <input
               type="password"
+              id="loginPass"
               class="w-full px-3 py-2 border border-gray-200 rounded text-gray-800 text-md"
               placeholder="Enter your password"
             />
@@ -241,6 +197,8 @@
       </div>
     </section>
   </body>
+<script src="./loginSignUp.js"></script>
 </html>
+
 
 <!-- npx tailwindcss -i ./src/input.css -o ./src/output.css --watch -->
