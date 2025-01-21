@@ -16,7 +16,7 @@
     {   
         $stmt = $conn->prepare("SELECT ID FROM Users WHERE login = ?");
         $stmt->bind_param("s", $login);
-		$stmt->execute();
+	$stmt->execute();
         $result = $stmt->get_result();
 
         if($result->num_rows > 0)
