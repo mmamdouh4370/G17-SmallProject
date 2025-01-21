@@ -69,19 +69,16 @@ function login(event){
         window.location.href = "contacts.html";
     })
     .catch(error => {
-        document.getElementById("loginResult").innerHTML = error.message;
+        console.log(error.message)
     });
 }
 
 function register(event){
     event.preventDefault();
-    userId = 0;
-	firstName = "";
-	lastName = "";
 
     let fullUrl = urlBase + "/Register." + ext;
     
-    firstName = document.getElementById("regFName").value;
+    let firstName = document.getElementById("regFName").value;
     let lastName = document.getElementById("regLName").value;
     let login = document.getElementById("regUser").value;
 	let pass = document.getElementById("regPass").value;
@@ -105,6 +102,8 @@ function register(event){
         return response.json();
     })
     .then(jsonObject => {
+        let userId = jsonObject.id;
+        
         let minutes = 20;
         let date = new Date();
         date.setTime(date.getTime() + (minutes * 60 * 1000));
@@ -114,6 +113,6 @@ function register(event){
         window.location.href = "contacts.html";
     })
     .catch(error => {
-        document.getElementById("loginResult").innerHTML = error.message;
+        console.log(error.message)
     });
 }
