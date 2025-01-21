@@ -98,17 +98,17 @@ function register(event){
         if (!response.ok) {
             throw new Error('Registration Failed');
         }
-        console.log(response.json())
         return response.json();
     })
     .then(jsonObject => {
         let userId = jsonObject.id;
-        
+
         let minutes = 20;
         let date = new Date();
         date.setTime(date.getTime() + (minutes * 60 * 1000));
     
         document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+        console.log('Cookies:', document.cookie);
 
         window.location.href = "contacts.html";
     })
