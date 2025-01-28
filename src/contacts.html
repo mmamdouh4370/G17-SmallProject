@@ -111,6 +111,7 @@
                   <th class="border-2 border-gray-700 px-4 py-2 text-left">Last Name</th>
                   <th class="border-2 border-gray-700 px-4 py-2 text-left">Email</th>
                   <th class="border-2 border-gray-700 px-4 py-2 text-left">Phone Number</th>
+                  <th class="border-2 border-gray-700 px-4 py-2 text-left">Edit</th>
                 </tr>
               </thead>
               <tbody id="tBody">
@@ -120,26 +121,26 @@
           </div>
         </div>
         <div class = "flex justify-center">
-          <div class="mt-1 p-4 border border-gray-300 bg-slate-400 rounded shadow-lg">
-            <h2 class="text-lg font-bold mb-4">Add New Contact</h2>
+          <div class="mt-1 p-4 bg-primary rounded shadow-lg">
+            <h2 class="text-alttext text-lg font-bold mb-4">Add New Contact</h2>
             <form id="addContactForm" class="grid gap-4">
               <div>
-                <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-                <input id="firstName" type="text" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" required>
+                <label for="firstName" class="block text-sm font-medium text-alttext">First Name</label>
+                <input id="firstName" type="text" placeholder = "Enter your first name" class="mt-1 block w-80 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80 px-3 py-2" required>
               </div>
               <div>
-                <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
-                <input id="lastName" type="text" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" required>
+                <label for="lastName" class="block text-sm font-medium text-alttext">Last Name</label>
+                <input id="lastName" type="text" placeholder = "Enter your last name" class="mt-1 block w-80 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80 px-3 py-2" required>
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input id="email" type="email" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2" placeholder="name@email.com">
+                <label for="email" class="block text-sm font-medium text-alttext">Email</label>
+                <input id="email" type="email" class="mt-1 block w-80 px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80" placeholder="name@email.com">
               </div>
               <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                <input id="phone" type="text" placeholder="XXX-XXX-XXXX" class="mt-1 block w-80 border border-gray-300 rounded px-3 py-2">
+                <label for="phone" class="block text-sm font-medium text-alttext">Phone Number</label>
+                <input id="phone" type="text" placeholder="XXX-XXX-XXXX" class="mt-1 block w-80  px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80">
               </div>
-              <button id = "addContactButton" type= "button" onclick = "addContact();" class="bg-blue-500 w-80 text-white px-4 py-2 rounded shadow hover:bg-blue-600" >
+              <button id = "addContactButton" type= "button" onclick = "isValid();" class="bg-darkalt hover:bg-darkalt/90 px-4 py-2 shadow text-text rounded font-semibold text-lg" >
                 Add Contact
               </button>
             </form>

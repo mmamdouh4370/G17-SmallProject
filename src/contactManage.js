@@ -13,12 +13,67 @@ function getCookie(name) {
 // Get userId from cookies
 let userId = getCookie("userId");
 
+function isValidFirstName(firstName)
+{
+    const firstNameRegex = /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s'-]{1,49}$/;
+    if(firstNameRegex.test(firstName))
+    {
+        return true;
+    }
+    return false;
+}
+
+function isValidLastName(lastName)
+{
+    const lastNameRegex = /^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s'-]{1,49}$/;
+    if(lastNameRegex.test(lastName))
+    {
+        return true;
+    }
+    return false;
+}
+
+function isValidEmail(email)
+{
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;    
+    if(emailRegex.test(email))
+    {
+        return true;
+    }
+    return false;
+}
+
+function isValidPhone(phone)
+{
+    const phoneRegex = /^\d{10}$/;
+    if(phoneRegex.test(phone))
+    {
+        return true;
+    }
+    return false;
+}
+
+function isValid()
+{
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+
+    if(isValidFirstName(firstName) && isValidLastName(lastName) 
+    && isValidEmail(email) && isValidPhone(phone))
+    {
+        addContact();
+    }
+
+}
+
 function addContact()
 {
-    let firstName = document.getElementById("firstName").value.trim();
-    let lastName = document.getElementById("lastName").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let phone = document.getElementById("phone").value.trim();
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
 
     let tmp = 
     {
