@@ -1,8 +1,10 @@
-# Group 17 Small Project: LAMP Fullstack Application
+# Social Loafers
+
+[a lamp stack contact manager webapp for Dr. Leinecker's POOSD course](http://159.223.165.192/G17-SmallProject/src)
 
 ## Contributors
 
-Project Manager: [Mohammed Mamdouh](https://github.com/mmamdouh4370)
+Project Manager/Frontend: [Mohammed Mamdouh](https://github.com/mmamdouh4370)
 
 Frontend: [Shaun Gorllapati](https://github.com/ShaunG219)
 

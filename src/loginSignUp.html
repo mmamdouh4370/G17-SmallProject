@@ -6,7 +6,7 @@
     <title>Social Loafers</title>
     <link rel="stylesheet" href="./output.css" />
   </head>
-  <body class="bg-background text-text overflow-hidden">
+  <body class="bg-background text-text overflow-auto">
     <nav class="bg-secondary">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -96,47 +96,76 @@
       </div>
     </nav>
     <section class="min-h-screen flex items-center justify-center">
-      <div class="bg-primary rounded-lg shadow-lg p-8 h-[42rem] w-[30rem] -mt-24 drop-shadow-md">
+      <div id="form-container" class="bg-primary overflow-y-auto rounded-lg shadow-lg p-8 h-[42rem] w-[30rem] mt-[3rem] drop-shadow-md">
         <form id="create-account-form" class="space-y-4 active" onSubmit="register(event)">
           <h2 class="text-2xl mt-2 mb-8 text-alttext font-bold text-center">Create Your Account</h2>
           <div class="space-y-1">
             <label class="block text-lg font-semibold text-alttext">First Name</label>
-            <input
-              type="text"
-              id="regFName"
-              class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
-              placeholder="Enter your first name"
-            />
+            <div class="relative">
+              <input
+                type="text"
+                id="regFName"
+                class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
+                placeholder="Enter your first name"
+                aria-invalid="false"
+                aria-describedby="regFNameError"
+              />
+              <span id="regFNameError" class="hidden text-red-500 text-md" aria-live="polite">
+                Please enter your first name.
+              </span>
+            </div>
           </div>
           <div class="space-y-1">
             <label class="block text-lg font-semibold text-alttext">Last Name</label>
-            <input
-              type="text"
-              id="regLName"
-              class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
-              placeholder="Enter your last name"
-            />
+            <div class="relative">
+              <input
+                type="text"
+                id="regLName"
+                class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
+                placeholder="Enter your last name"
+                aria-invalid="false"
+                aria-describedby="regLNameError"
+              />
+              <span id="regLNameError" class="hidden text-red-500 text-md" aria-live="polite">
+                Please enter your last name.
+              </span>
+            </div>
           </div>
           <div class="space-y-1">
             <label class="block text-lg font-semibold text-alttext">Username</label>
-            <input
-              type="text"
-              id="regUser"
-              class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
-              placeholder="Choose a username"
-            />
+            <div class="relative">
+              <input
+                type="text"
+                id="regUser"
+                class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
+                placeholder="Choose a username"
+                aria-invalid="false"
+                aria-describedby="regUserError"
+              />
+              <span id="regUserError" class="hidden text-red-500 text-md" aria-live="polite">
+                Please choose a username.
+              </span>
+            </div>
           </div>
-
-          <div class="space-y-1 pb-10">
+          <div class="space-y-1 pb-2">
             <label class="block text-lg font-semibold text-alttext">Password</label>
-            <input
-              type="password"
-              id="regPass"
-              class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
-              placeholder="Create a password"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="regPass"
+                class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
+                placeholder="Create a password"
+                aria-invalid="false"
+                aria-describedby="regPassError"
+              />
+              <span id="regPassError" class="hidden text-red-500 text-md" aria-live="polite">
+                Please create a password.
+              </span>
+            </div>
           </div>
-
+          <div id="registerFormError" class="hidden text-red-500 text-md text-center" aria-live="polite">
+            Registration failed. Please try again.
+          </div>
           <button
             type="submit"
             class="w-full bg-darkalt hover:bg-darkalt/90 px-4 py-2 font-semibold text-text rounded text-xl"
@@ -145,28 +174,43 @@
           </button>
         </form>
 
-        <form id="login-form" class="hidden space-y-4 active">
+        <form id="login-form" class="hidden space-y-4 active" onSubmit="login(event)">
           <h2 class="text-2xl mt-2 mb-8 text-alttext font-bold text-center">Login to Your Account</h2>
           <div class="space-y-1">
             <label class="block text-lg font-semibold text-alttext">Username</label>
-            <input
-              type="text"
-              id="loginUser"
-              class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
-              placeholder="Enter your username"
-            />
+            <div class="relative">
+              <input
+                type="text"
+                id="loginUser"
+                class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
+                placeholder="Enter your username"
+                aria-invalid="false"
+                aria-describedby="loginUserError"
+              />
+              <span id="loginUserError" class="hidden text-red-500 text-md" aria-live="polite">
+                Please enter a valid username.
+              </span>
+            </div>
           </div>
-        
-          <div class="space-y-1 pb-[14rem]">
+          <div class="space-y-1 pb-4">
             <label class="block text-lg font-semibold text-alttext">Password</label>
-            <input
-              type="password"
-              id="loginPass"
-              class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
-              placeholder="Enter your password"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="loginPass"
+                class="w-full px-3 py-2 border-2 border-darkalt rounded-md text-text bg-secondary placeholder:text-text/80"
+                placeholder="Enter your password"
+                aria-invalid="false"
+                aria-describedby="loginPassError"
+              />
+              <span id="loginPassError" class="hidden text-red-500 text-md" aria-live="polite">
+                Please enter a valid password.
+              </span>
+            </div>
           </div>
-        
+          <div id="loginFormError" class="hidden text-red-500 text-md text-center mt-4" aria-live="polite">
+            Login failed. Please try again.
+          </div>
           <button
             type="submit"
             class="w-full bg-darkalt hover:bg-darkalt/90 px-4 py-2 font-semibold text-text rounded text-xl"
@@ -174,7 +218,6 @@
             Login
           </button>
         </form>
-        
 
         <button
           id="toggle-button"
@@ -187,9 +230,7 @@
       </div>
     </section>
   </body>
-  <script src="./loginSignUp.js"></script>
+  <script src="../js/loginSignUp.js"></script>
 </html>
-
-
 
 <!-- npx tailwindcss -i ./src/input.css -o ./src/output.css --watch -->
