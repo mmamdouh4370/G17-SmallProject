@@ -122,6 +122,7 @@ function isValid()
 
 function addContact()
 {
+    console.log("Adding contact");
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
     let email = document.getElementById("email").value;
