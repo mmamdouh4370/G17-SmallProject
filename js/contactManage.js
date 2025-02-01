@@ -161,8 +161,8 @@ function addContact()
                       const newRow = document.createElement("tr");
                       newRow.id = "row" + contactId;
                       newRow.innerHTML = `
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${firstName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${lastName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
