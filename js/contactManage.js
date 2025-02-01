@@ -341,5 +341,55 @@ function deleteContact(contactId) {
     xhr.send(jsonPayload);
 }
 
+function searchContacts() {
+    const searchQuery = document.getElementById("searchInput").value.trim(); // Get the search query from the input field
+
+    let tmp = {
+        search: searchQuery,
+        userId: userId
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/SearchContacts.' + ext;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+                if (jsonObject.error) {
+                    console.log(jsonObject.error);
+                    return;
+                }
+
+                // Clear existing rows in the table
+                const tableBody = document.getElementById("tBody");
+                tableBody.innerHTML = ''; // Clear previous rows
+
+                // Add new rows based on the search results
+                jsonObject.results.forEach(contact => {
+                    const newRow = document.createElement("tr");
+                    newRow.id = "row" + contact.id;
+                    newRow.innerHTML = `
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.FirstName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${contact.LastName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(newRow); // Append the new row to the table
+                });
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
 
   
