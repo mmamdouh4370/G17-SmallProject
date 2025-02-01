@@ -1,6 +1,10 @@
 const urlBase = "http://159.223.165.192/G17-SmallProject/LAMPAPI";
 const ext = "php";
 
+document.addEventListener("DOMContentLoaded", function() {
+    loadContacts(); // Load contacts when the page is loaded
+});
+
 function getUserIdFromCookie() {
     let cookies = document.cookie.split("; ");
     for (let cookie of cookies) {
@@ -45,8 +49,6 @@ function clearError(inputId)
         errorElement.remove();
     }
 }
-
-
 
 function isValidLastName(lastName)
 {
@@ -200,58 +202,54 @@ function addContact()
 
 
 //Work in progress
-function loadContacts() 
-{
-  let tmp = 
-  {
-      search: "",
-      userId: userId
-  };
-
-  let jsonPayload = JSON.stringify(tmp);
-
-  let url = urlBase + '/SearchContacts.' + ext;
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-  try 
-  {
-    xhr.onreadystatechange = function () 
-    {
-        if (this.readyState == 4 && this.status == 200) 
-        {
-            let jsonObject = JSON.parse(xhr.responseText);
-            if (jsonObject.error) 
-            {
-                console.log(jsonObject.error);
-                return;
-            }
-            let text = "<table border='1'>"
-            for (let i = 0; i < jsonObject.results.length; i++) 
-            {
-                ids[i] = jsonObject.results[i].ID
-                text += "<tr id='row" + i + "'>"
-                text += "<td id='first_Name" + i + "'><span>" + jsonObject.results[i].FirstName + "</span></td>";
-                text += "<td id='last_Name" + i + "'><span>" + jsonObject.results[i].LastName + "</span></td>";
-                text += "<td id='email" + i + "'><span>" + jsonObject.results[i].EmailAddress + "</span></td>";
-                text += "<td id='phone" + i + "'><span>" + jsonObject.results[i].PhoneNumber + "</span></td>";
-                // text += "<td>" +
-                //     "<button type='button' id='edit_button" + i + "' class='w3-button w3-circle w3-lime' onclick='edit_row(" + i + ")'>" + "<span class='glyphicon glyphicon-edit'></span>" + "</button>" +
-                //     "<button type='button' id='save_button" + i + "' value='Save' class='w3-button w3-circle w3-lime' onclick='save_row(" + i + ")' style='display: none'>" + "<span class='glyphicon glyphicon-saved'></span>" + "</button>" +
-                //     "<button type='button' onclick='delete_row(" + i + ")' class='w3-button w3-circle w3-amber'>" + "<span class='glyphicon glyphicon-trash'></span> " + "</button>" + "</td>";
-                // text += "<tr/>"
-            }
-            text += "</table>"
-            document.getElementById("tBody").innerHTML = text;
-        }
+function loadContacts() {
+    let tmp = {
+        search: "", // You can modify this if you want to enable searching functionality
+        userId: userId
     };
-    xhr.send(jsonPayload);
-  } 
-  catch (err) 
-  {
-      console.log(err.message);
-  }
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/SearchContacts.' + ext;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+                if (jsonObject.error) {
+                    console.log(jsonObject.error);
+                    return;
+                }
+
+                // Clear existing rows
+                const tableBody = document.getElementById("tBody");
+                tableBody.innerHTML = ''; // Clear previous rows
+
+                // Add new rows from the response
+                jsonObject.results.forEach(contact => {
+                    const newRow = document.createElement("tr");
+                    newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
+                    newRow.innerHTML = `
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.FirstName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${contact.LastName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(newRow); // Append the row to the table
+                });
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function save_row(no) {
