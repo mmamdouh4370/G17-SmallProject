@@ -151,6 +151,35 @@ function addContact()
         {
             if (this.readyState == 4 && this.status == 200) 
             {
+                let response = JSON.parse(xhr.responseText);
+                let contactId = response.contactId;
+
+                if (firstName !== "" && lastName !== "" && email !== "" && phone !== "") 
+                    {
+                      // Create a new row
+                      const tableBody = document.getElementById("tBody");
+                      const newRow = document.createElement("tr");
+                
+                      newRow.innerHTML = `
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${firstName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${lastName}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
+                        </td>
+                      `;
+                
+                      // Append the new row
+                      tableBody.appendChild(newRow);
+                
+                    // Clear the input fields after adding the contact
+                    document.getElementById("firstName").value = "";
+                    document.getElementById("lastName").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("phone").value = "";
+                    } 
                 console.log("Contact has been added");
                 // Clear input fields in form 
                 document.getElementById("addContactForm").reset();
@@ -166,38 +195,6 @@ function addContact()
     catch (err) 
     {
         console.log(err.message);
-    }
-
-
-    if (firstName !== "" && lastName !== "" && email !== "" && phone !== "") 
-    {
-      // Create a new row
-      const tableBody = document.getElementById("tBody");
-      const newRow = document.createElement("tr");
-
-      newRow.innerHTML = `
-        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${firstName}</td>
-        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${lastName}</td>
-        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
-        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
-        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
-            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded onclick="deleteContact(${userId})">Delete</button>
-        </td>
-      `;
-
-      // Append the new row
-      tableBody.appendChild(newRow);
-
-    // Clear the input fields after adding the contact
-    document.getElementById("firstName").value = "";
-    document.getElementById("lastName").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("phone").value = "";
-    } 
-    else 
-    {
-      alert("All fields are required!");
     }
 }
 
@@ -313,7 +310,7 @@ function deleteContact(contactId) {
     
     // Prepare the data to be sent in the request
     const data = {
-        userId: userId, // Assuming you have the userId from the cookie
+        userId: userId,
         firstName: firstName,
         lastName: lastName
     };
@@ -323,7 +320,7 @@ function deleteContact(contactId) {
 
     // Create a new XMLHttpRequest to send the delete request to PHP
     let xhr = new XMLHttpRequest();
-    let url = urlBase + '/Delete.' + ext; // Adjust if your URL structure differs
+    let url = urlBase + '/Delete.' + ext;
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
