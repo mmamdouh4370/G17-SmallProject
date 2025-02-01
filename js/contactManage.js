@@ -159,6 +159,8 @@ function addContact()
             }
         };
         xhr.send(jsonPayload);
+        console.log("tmp: " + tmp);
+        console.log("Sending: " + jsonPayload);
     } 
     catch (err) 
     {
