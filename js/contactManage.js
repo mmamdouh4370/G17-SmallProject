@@ -180,7 +180,10 @@ function addContact()
         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${lastName}</td>
         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
-        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2"></td>
+        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
+            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded onclick="deleteContact(${contactId})">Delete</button>
+        </td>
       `;
 
       // Append the new row
@@ -300,6 +303,47 @@ function save_row(no) {
   {
       console.log(err.message);
   }
+}
+
+function deleteContact(contactId) {
+    // Retrieve the contact details from the row (or pass them via data attributes in the button)
+    const row = document.getElementById("row" + contactId);
+    const firstName = row.querySelector(".firstName").textContent;
+    const lastName = row.querySelector(".lastName").textContent;
+    
+    // Prepare the data to be sent in the request
+    const data = {
+        userId: userId, // Assuming you have the userId from the cookie
+        firstName: firstName,
+        lastName: lastName
+    };
+
+    // Convert data to JSON
+    const jsonPayload = JSON.stringify(data);
+
+    // Create a new XMLHttpRequest to send the delete request to PHP
+    let xhr = new XMLHttpRequest();
+    let url = urlBase + '/Delete.' + ext; // Adjust if your URL structure differs
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const response = JSON.parse(xhr.responseText);
+            
+            // If there's no error in the response, remove the row from the table
+            if (response.error === "") {
+                row.remove(); // Remove the table row from the DOM
+                console.log("Contact deleted successfully.");
+            } else {
+                console.log("Error deleting contact:", response.error);
+            }
+        }
+    };
+
+    // Send the request with the contact data
+    xhr.send(jsonPayload);
 }
 
 
