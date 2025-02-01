@@ -216,6 +216,57 @@ function register(event) {
         date.toGMTString();
       console.log("Cookies:", document.cookie);
 
+      loginUserAfterRegister(login, pass, firstName, lastName);
+      //window.location.href = "contacts.html";
+    })
+    .catch((error) => {
+      console.log(error.message);
+      document.getElementById("registerFormError").classList.remove("hidden");
+    });
+}
+
+function loginUserAfterRegister(login, pass, firstName, lastName) {
+  let fullUrl = urlBase + "/Login." + ext;
+
+  let preJson = { login: login, password: pass };
+  let jsonPayload = JSON.stringify(preJson);
+
+  fetch(fullUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+    body: jsonPayload,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Login failed after registration");
+      }
+      return response.json();
+    })
+    .then((jsonObject) => {
+      let userId = jsonObject.id;
+
+      if (userId < 1) {
+        document.getElementById("registerFormError").classList.remove("hidden");
+        return;
+      }
+
+      let minutes = 20;
+      let date = new Date();
+      date.setTime(date.getTime() + minutes * 60 * 1000);
+
+      document.cookie =
+        "firstName=" +
+        firstName +
+        ",lastName=" +
+        lastName +
+        ",userId=" +
+        userId +
+        ";expires=" +
+        date.toGMTString();
+
+      console.log("Cookies:", document.cookie);
       window.location.href = "contacts.html";
     })
     .catch((error) => {
