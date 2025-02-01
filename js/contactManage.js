@@ -1,17 +1,18 @@
 const urlBase = "http://159.223.165.192/G17-SmallProject/LAMPAPI";
 const ext = "php";
 
-function getCookie(name) {
-    let value = "; " + document.cookie;
-    let parts = value.split("; " + name + "=");
-    if (parts.length === 2) {
-        return parts.pop().split(";").shift();
+function getUserIdFromCookie() {
+    let cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+      if (cookie.includes("userId=")) {
+        return cookie.split("userId=")[1].split(",")[0]; // Extract only userId
+      }
     }
-    return null;
-}
+    return null; // Return null if not found
+  }
 
-// Get userId from cookies
-let userId = getCookie("userId");
+  let userId = getUserIdFromCookie();
+  console.log("Final User ID:", userId);
 
 function isValidFirstName(firstName)
 {
