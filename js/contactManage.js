@@ -133,7 +133,7 @@ function addContact()
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phone,
-      emailAddress: email,
+      email: email,
       userId: userId
     };
 
