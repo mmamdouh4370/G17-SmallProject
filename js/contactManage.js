@@ -168,7 +168,7 @@ function addContact()
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 onclick="editContact(${contact.id})">Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id}")>Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
                         </td>
                       `;
@@ -238,7 +238,7 @@ function loadContacts() {
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 onclick="editContact(${contact.id})">Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
                         </td>
                     `;
@@ -401,7 +401,7 @@ function saveContact(contactId) {
                 console.log("Contact has been updated");
 
                 // Exit edit mode
-                row.classList.remove("editing", "bg-blue-200"); // Remove Tailwind edit background
+                row.classList.remove("editing", "bg-blue-200");
 
                 // Replace input fields with new text
                 row.querySelector(".firstName").innerHTML = firstName;
@@ -411,10 +411,11 @@ function saveContact(contactId) {
 
                 // Change save button back to edit button
                 editButton.innerHTML = "Edit";
-                editButton.classList.remove("bg-green-500", "hover:bg-green-600"); // Remove save button styles
-                editButton.classList.add("bg-blue-500", "hover:bg-blue-600"); // Restore edit button styles
+                editButton.classList.remove("bg-green-500", "hover:bg-green-600");
+                editButton.classList.add("bg-blue-500", "hover:bg-blue-600");
 
-                editButton.onclick = function() {
+                // ✅ Fix: Ensure correct assignment of onclick function
+                editButton.onclick = function () {
                     editContact(contactId);
                 };
             }
@@ -424,3 +425,4 @@ function saveContact(contactId) {
         console.log(err.message);
     }
 }
+
