@@ -155,7 +155,7 @@ function addContact()
             {
                 let response = JSON.parse(xhr.responseText);
                 let contactId = response.contactId;
-
+                console("In addContact method, Contact ID: " + contactId);
                 if (firstName !== "" && lastName !== "" && email !== "" && phone !== "") 
                     {
                       // Create a new row
@@ -233,6 +233,7 @@ function loadContacts() {
                 jsonObject.results.forEach(contact => {
                     const newRow = document.createElement("tr");
                     newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
+                    console.log("In loadcontacts method, Contact ID: " + contact.id);
                     newRow.innerHTML = `
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
