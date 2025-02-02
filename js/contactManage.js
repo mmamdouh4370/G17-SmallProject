@@ -414,7 +414,7 @@ function saveContact(contactId) {
                 editButton.classList.remove("bg-green-500", "hover:bg-green-600");
                 editButton.classList.add("bg-blue-500", "hover:bg-blue-600");
 
-                // ✅ Fix: Ensure correct assignment of onclick function
+                //Ensure correct assignment of onclick function
                 editButton.onclick = function () {
                     editContact(contactId);
                 };
