@@ -348,6 +348,7 @@ function searchContacts() {
 }
 
 function editContact(contactId) {
+    console.log("Editing contact with ID:", contactId);
     let row = document.getElementById("row" + contactId);
     let firstNameCell = row.querySelector(".firstName");
     let lastNameCell = row.querySelector(".lastName");
@@ -377,6 +378,11 @@ function editContact(contactId) {
 }
 
 function saveContact(contactId) {
+    if (!contactId) {
+        console.error("Invalid contact ID:", contactId);
+        return;
+    }
+    
     let row = document.getElementById("row" + contactId);
     let firstName = document.getElementById("firstName" + contactId).value;
     let lastName = document.getElementById("lastName" + contactId).value;
@@ -385,12 +391,14 @@ function saveContact(contactId) {
     let editButton = document.getElementById("editBtn" + contactId);
 
     let tmp = {
-        contactId: contactId,
+        contactId: Number(contactId),
         newFirstName: firstName,
         newLastName: lastName,
         newPhoneNumber: phone,
         newEmail: email
     };
+
+    console.log("tmp being sent:", tmp);
 
     let jsonPayload = JSON.stringify(tmp);
     let url = urlBase + '/Update.' + ext;
@@ -419,7 +427,7 @@ function saveContact(contactId) {
                 editButton.classList.remove("bg-green-500", "hover:bg-green-600");
                 editButton.classList.add("bg-blue-500", "hover:bg-blue-600");
 
-                //Ensure correct assignment of onclick function
+                
                 editButton.onclick = function () {
                     editContact(contactId);
                 };
