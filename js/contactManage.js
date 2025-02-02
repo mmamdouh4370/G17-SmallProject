@@ -165,8 +165,8 @@ function addContact()
                       newRow.innerHTML = `
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${email}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
                             <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
@@ -235,8 +235,8 @@ function loadContacts() {
                     newRow.innerHTML = `
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.FirstName}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${contact.LastName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${contact.Email}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${contact.Phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
                             <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
@@ -328,8 +328,8 @@ function searchContacts() {
                     newRow.innerHTML = `
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.FirstName}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${contact.LastName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${contact.Email}</td>
+                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${contact.Phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
                             <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
