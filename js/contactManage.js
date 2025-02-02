@@ -218,6 +218,7 @@ function loadContacts() {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
+                console.log("jsonObject in load: " + jsonObject.results);
                 if (jsonObject.error) {
                     console.log(jsonObject.error);
                     return;
@@ -230,7 +231,7 @@ function loadContacts() {
                 // Add new rows from the response
                 jsonObject.results.forEach(contact => {
                     const newRow = document.createElement("tr");
-                    console.log("In loadcontacts method, Contact ID: " + contact.id);
+                    console.log("In loadcontacts method, Contact ID: " + contact.contactId);
                     newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
                     newRow.innerHTML = `
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.firstName}</td>
