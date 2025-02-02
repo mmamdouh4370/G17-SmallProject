@@ -393,7 +393,7 @@ function saveContact(contactId) {
     };
 
     let jsonPayload = JSON.stringify(tmp);
-    let url = urlBase + '/UpdateContacts.' + ext;
+    let url = urlBase + '/Update.' + ext;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
