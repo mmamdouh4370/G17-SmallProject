@@ -168,7 +168,7 @@ function addContact()
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
                         </td>
                       `;
@@ -238,7 +238,7 @@ function loadContacts() {
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
                         </td>
                     `;
@@ -252,53 +252,6 @@ function loadContacts() {
     }
 }
 
-function save_row(no) {
-  var namef_val = document.getElementById("namef_text" + no).value;
-  var namel_val = document.getElementById("namel_text" + no).value;
-  var email_val = document.getElementById("email_text" + no).value;
-  var phone_val = document.getElementById("phone_text" + no).value;
-  var id_val = ids[no]
-
-  document.getElementById("first_Name" + no).innerHTML = namef_val;
-  document.getElementById("last_Name" + no).innerHTML = namel_val;
-  document.getElementById("email" + no).innerHTML = email_val;
-  document.getElementById("phone" + no).innerHTML = phone_val;
-
-  // document.getElementById("edit_button" + no).style.display = "inline-block";
-  // document.getElementById("save_button" + no).style.display = "none";
-
-  let tmp = {
-      phoneNumber: phone_val,
-      emailAddress: email_val,
-      newFirstName: namef_val,
-      newLastName: namel_val,
-      id: id_val
-  };
-
-  let jsonPayload = JSON.stringify(tmp);
-
-  let url = urlBase + '/UpdateContacts.' + ext;
-
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  try 
-  {
-      xhr.onreadystatechange = function () 
-      {
-          if (this.readyState == 4 && this.status == 200) 
-          {
-              console.log("Contact has been updated");
-              loadContacts();
-          }
-      };
-      xhr.send(jsonPayload);
-  } 
-  catch (err) 
-  {
-      console.log(err.message);
-  }
-}
 
 function deleteContact(contactId) {
     // Retrieve the contact details from the row (or pass them via data attributes in the button)
@@ -378,7 +331,7 @@ function searchContacts() {
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2">Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
                         </td>
                     `;
@@ -392,4 +345,82 @@ function searchContacts() {
     }
 }
 
-  
+function editContact(contactId) {
+    let row = document.getElementById("row" + contactId);
+    let firstNameCell = row.querySelector(".firstName");
+    let lastNameCell = row.querySelector(".lastName");
+    let emailCell = row.querySelector(".email");
+    let phoneCell = row.querySelector(".phone");
+    let editButton = document.getElementById("editBtn" + contactId);
+
+    if (!row.classList.contains("editing")) {
+        // Enter edit mode
+        row.classList.add("editing", "bg-blue-200"); // Apply Tailwind light blue background
+
+        // Replace text with input fields
+        firstNameCell.innerHTML = `<input type="text" value="${firstNameCell.textContent}" id="firstName${contactId}" class="border rounded px-2 py-1">`;
+        lastNameCell.innerHTML = `<input type="text" value="${lastNameCell.textContent}" id="lastName${contactId}" class="border rounded px-2 py-1">`;
+        emailCell.innerHTML = `<input type="email" value="${emailCell.textContent}" id="email${contactId}" class="border rounded px-2 py-1">`;
+        phoneCell.innerHTML = `<input type="text" value="${phoneCell.textContent}" id="phone${contactId}" class="border rounded px-2 py-1">`;
+
+        // Change edit button to a save button (Check mark)
+        editButton.innerHTML = "✔";
+        editButton.classList.remove("bg-blue-500"); // Remove edit button color
+        editButton.classList.add("bg-green-500", "hover:bg-green-600"); // Apply Tailwind green background
+        editButton.onclick = function() {
+            saveContact(contactId);
+        };
+    }
+}
+
+function saveContact(contactId) {
+    let row = document.getElementById("row" + contactId);
+    let firstName = document.getElementById("firstName" + contactId).value;
+    let lastName = document.getElementById("lastName" + contactId).value;
+    let email = document.getElementById("email" + contactId).value;
+    let phone = document.getElementById("phone" + contactId).value;
+    let editButton = document.getElementById("editBtn" + contactId);
+
+    let tmp = {
+        id: contactId,
+        newFirstName: firstName,
+        newLastName: lastName,
+        emailAddress: email,
+        phoneNumber: phone
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/UpdateContacts.' + ext;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Contact has been updated");
+
+                // Exit edit mode
+                row.classList.remove("editing", "bg-blue-200"); // Remove Tailwind edit background
+
+                // Replace input fields with new text
+                row.querySelector(".firstName").innerHTML = firstName;
+                row.querySelector(".lastName").innerHTML = lastName;
+                row.querySelector(".email").innerHTML = email;
+                row.querySelector(".phone").innerHTML = phone;
+
+                // Change save button back to edit button
+                editButton.innerHTML = "Edit";
+                editButton.classList.remove("bg-green-500", "hover:bg-green-600"); // Remove save button styles
+                editButton.classList.add("bg-blue-500", "hover:bg-blue-600"); // Restore edit button styles
+
+                editButton.onclick = function() {
+                    editContact(contactId);
+                };
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
+}
