@@ -152,13 +152,10 @@ function addContact()
         xhr.onreadystatechange = function () 
         {
             if (this.readyState == 4 && this.status == 200) 
-            {
-                let response = JSON.parse(xhr.responseText);
-                let contactId = response.contactId;
-                console.log("API Response:", response);
-                console.log("In addContact method, Contact ID: " + contactId);
+            {   
                 if (firstName !== "" && lastName !== "" && email !== "" && phone !== "") 
-                    {
+                {
+                        /*
                       // Create a new row
                       const tableBody = document.getElementById("tBody");
                       const newRow = document.createElement("tr");
@@ -177,19 +174,19 @@ function addContact()
                 
                       // Append the new row
                       tableBody.appendChild(newRow);
-                
+                */
+                       
+                    // Clear input fields after adding
+                    document.getElementById("addContactForm").reset();  
+
                     // Clear the input fields after adding the contact
-                    document.getElementById("firstName").value = "";
-                    document.getElementById("lastName").value = "";
-                    document.getElementById("email").value = "";
-                    document.getElementById("phone").value = "";
-                    } 
+                    // document.getElementById("firstName").value = "";
+                    // document.getElementById("lastName").value = "";
+                    // document.getElementById("email").value = "";
+                    // document.getElementById("phone").value = "";
+                    loadContacts();  
+                } 
                 console.log("Contact has been added");
-                // Clear input fields in form 
-                document.getElementById("addContactForm").reset();
-                // reload contacts table and switch view to show
-                // loadContacts();
-                // showTable();
             }
         };
         xhr.send(jsonPayload);
@@ -206,7 +203,7 @@ function addContact()
 //Work in progress
 function loadContacts() {
     let tmp = {
-        search: "", // You can modify this if you want to enable searching functionality
+        search: "", 
         userId: userId
     };
 
@@ -236,10 +233,10 @@ function loadContacts() {
                     console.log("In loadcontacts method, Contact ID: " + contact.id);
                     newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
                     newRow.innerHTML = `
-    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
-    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
-    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${email}</td>
-    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${phone}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.firstName}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${contact.lastName}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${contact.email}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${contact.phone}</td>
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
         <button id="editBtn${contact.id}" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
         <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
