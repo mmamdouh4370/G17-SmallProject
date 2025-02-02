@@ -385,7 +385,7 @@ function saveContact(contactId) {
         return;
     }
     
-    let row = document.getElementById("row" + contactId);
+    // Retrieve updated values from the input fields
     let firstName = document.getElementById("firstName" + contactId).value;
     let lastName = document.getElementById("lastName" + contactId).value;
     let email = document.getElementById("email" + contactId).value;
@@ -393,7 +393,7 @@ function saveContact(contactId) {
     let editButton = document.getElementById("editBtn" + contactId);
 
     let tmp = {
-        contactId: Number(contactId),
+        contactId: contactId,
         newFirstName: firstName,
         newLastName: lastName,
         newPhoneNumber: phone,
@@ -415,6 +415,7 @@ function saveContact(contactId) {
                 console.log("Response:", xhr.responseText);
                 let response = JSON.parse(xhr.responseText);
                 console.log("Update API Response:", response);
+                
                 // Exit edit mode
                 row.classList.remove("editing", "bg-blue-200");
 
