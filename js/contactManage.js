@@ -168,7 +168,7 @@ function addContact()
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId}")>Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
                         </td>
                       `;
@@ -331,7 +331,7 @@ function searchContacts() {
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Email}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">${contact.Phone}</td>
                         <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 onclick="editContact(${contact.id})">Edit</button>
+                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
                             <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
                         </td>
                     `;
