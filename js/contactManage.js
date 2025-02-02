@@ -402,7 +402,9 @@ function saveContact(contactId) {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log("Contact has been updated");
-
+                console.log("Response:", xhr.responseText);
+                let response = JSON.parse(xhr.responseText);
+                console.log("Update API Response:", response);
                 // Exit edit mode
                 row.classList.remove("editing", "bg-blue-200");
 
