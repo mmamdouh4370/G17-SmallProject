@@ -155,7 +155,7 @@ function addContact()
             {
                 let response = JSON.parse(xhr.responseText);
                 let contactId = response.contactId;
-                console("In addContact method, Contact ID: " + contactId);
+                console.log("In addContact method, Contact ID: " + contactId);
                 if (firstName !== "" && lastName !== "" && email !== "" && phone !== "") 
                     {
                       // Create a new row
