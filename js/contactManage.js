@@ -155,6 +155,7 @@ function addContact()
             {
                 let response = JSON.parse(xhr.responseText);
                 let contactId = response.contactId;
+                console.log("API Response:", response);
                 console.log("In addContact method, Contact ID: " + contactId);
                 if (firstName !== "" && lastName !== "" && email !== "" && phone !== "") 
                     {
@@ -232,16 +233,16 @@ function loadContacts() {
                 // Add new rows from the response
                 jsonObject.results.forEach(contact => {
                     const newRow = document.createElement("tr");
-                    newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
                     console.log("In loadcontacts method, Contact ID: " + contact.id);
+                    newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
                     newRow.innerHTML = `
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${email}</td>
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${phone}</td>
     <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-        <button id="editBtn${contactId}" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId})">Edit</button>
-        <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
+        <button id="editBtn${contact.id}" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
+        <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
     </td>
 `;
 
