@@ -163,15 +163,16 @@ function addContact()
                       const newRow = document.createElement("tr");
                       newRow.id = "row" + contactId;
                       newRow.innerHTML = `
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${email}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${phone}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId})">Edit</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
-                        </td>
-                      `;
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${email}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${phone}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
+        <button id="editBtn${contactId}" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId})">Edit</button>
+        <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
+    </td>
+`;
+
                 
                       // Append the new row
                       tableBody.appendChild(newRow);
@@ -233,15 +234,16 @@ function loadContacts() {
                     const newRow = document.createElement("tr");
                     newRow.id = "row" + contact.id; // Assuming 'id' is the unique identifier
                     newRow.innerHTML = `
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${contact.FirstName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${contact.LastName}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${contact.Email}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${contact.Phone}</td>
-                        <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
-                            <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.id})">Edit</button>
-                            <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.id})">Delete</button>
-                        </td>
-                    `;
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 firstName">${firstName}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 lastName">${lastName}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 email">${email}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2 phone">${phone}</td>
+    <td class="border-2 border-secondary bg-primary text-secondary px-4 py-2">
+        <button id="editBtn${contactId}" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contactId})">Edit</button>
+        <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contactId})">Delete</button>
+    </td>
+`;
+
                     tableBody.appendChild(newRow); // Append the row to the table
                 });
             }
@@ -353,7 +355,8 @@ function editContact(contactId) {
     let phoneCell = row.querySelector(".phone");
     let editButton = document.getElementById("editBtn" + contactId);
 
-    if (!row.classList.contains("editing")) {
+    if (!row.classList.contains("editing")) 
+    {
         // Enter edit mode
         row.classList.add("editing", "bg-blue-200"); // Apply Tailwind light blue background
 
@@ -365,7 +368,7 @@ function editContact(contactId) {
 
         // Change edit button to a save button (Check mark)
         editButton.innerHTML = "✔";
-        editButton.classList.remove("bg-blue-500"); // Remove edit button color
+        editButton.classList.remove("bg-green-500"); // Remove edit button color
         editButton.classList.add("bg-green-500", "hover:bg-green-600"); // Apply Tailwind green background
         editButton.onclick = function() {
             saveContact(contactId);
