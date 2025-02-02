@@ -385,11 +385,11 @@ function saveContact(contactId) {
     let editButton = document.getElementById("editBtn" + contactId);
 
     let tmp = {
-        id: contactId,
+        contactId: contactId,
         newFirstName: firstName,
         newLastName: lastName,
-        emailAddress: email,
-        phoneNumber: phone
+        newPhoneNumber: phone,
+        newEmail: email
     };
 
     let jsonPayload = JSON.stringify(tmp);
