@@ -386,11 +386,19 @@ function saveContact(contactId) {
     }
     
     // Retrieve updated values from the input fields
+    let row = document.getElementById("row" + contactId);
     let firstName = document.getElementById("firstName" + contactId).value;
     let lastName = document.getElementById("lastName" + contactId).value;
     let email = document.getElementById("email" + contactId).value;
     let phone = document.getElementById("phone" + contactId).value;
     let editButton = document.getElementById("editBtn" + contactId);
+
+
+    // Basic validation
+    if (!isValidFirstName(firstName) || !isValidLastName(lastName) || !isValidEmail(email) || !isValidPhone(phone)) {
+        alert("Please enter valid details before saving.");
+        return;
+    }
 
     let tmp = {
         contactId: contactId,
@@ -411,10 +419,15 @@ function saveContact(contactId) {
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log("Contact has been updated");
-                console.log("Response:", xhr.responseText);
                 let response = JSON.parse(xhr.responseText);
-                console.log("Update API Response:", response);
+                
+                if (response.error) {
+                    console.error("Error updating contact:", response.error);
+                    alert("Failed to update contact.");
+                    return;
+                }
+                
+                console.log("Contact updated successfully.");
                 
                 // Exit edit mode
                 row.classList.remove("editing", "bg-blue-200");
@@ -438,6 +451,6 @@ function saveContact(contactId) {
         };
         xhr.send(jsonPayload);
     } catch (err) {
-        console.log(err.message);
+        console.log("Request failed: " + err.message);
     }
 }
