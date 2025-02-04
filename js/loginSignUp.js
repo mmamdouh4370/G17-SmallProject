@@ -1,6 +1,26 @@
 const urlBase = "http://159.223.165.192/G17-SmallProject/LAMPAPI";
 const ext = "php";
 
+document.addEventListener("DOMContentLoaded", () => {
+  checkLoginStatus();
+});
+
+function checkLoginStatus() {
+  let cookies = document.cookie.split("; ");
+  let userId = null;
+
+  cookies.forEach((cookie) => {
+    let [name, value] = cookie.split("=");
+    if (name === "userId") {
+      userId = value;
+    }
+  });
+
+  if (userId && userId !== "undefined") {
+    window.location.href = "contacts.html";
+  }
+}
+
 function toggleForm() {
   const createAccountForm = document.getElementById("create-account-form");
   const loginForm = document.getElementById("login-form");
@@ -18,8 +38,8 @@ function toggleForm() {
     formContainer.classList.remove("h-[42rem]");
     formContainer.classList.add("h-[32rem]");
 
-    formContainer.classList.remove("mt-[3rem]");
-    formContainer.classList.add("-mt-[6.4rem]");
+    formContainer.classList.remove("-mt-[3rem]");
+    formContainer.classList.add("-mt-[13rem]");
   } else {
     loginForm.classList.remove("active");
     loginForm.classList.add("hidden");
@@ -32,8 +52,8 @@ function toggleForm() {
     formContainer.classList.remove("h-[32rem]");
     formContainer.classList.add("h-[42rem]");
 
-    formContainer.classList.remove("-mt-[6.4rem]");
-    formContainer.classList.add("mt-[3rem]");
+    formContainer.classList.remove("-mt-[13rem]");
+    formContainer.classList.add("-mt-[3rem]");
   }
 }
 
@@ -228,7 +248,7 @@ function register(event) {
 function loginUserAfterRegister(login, pass, firstName, lastName) {
   let fullUrl = urlBase + "/Login." + ext;
 
-  let preJson = { login: login, password: pass };
+  let preJson = {login: login, password: pass};
   let jsonPayload = JSON.stringify(preJson);
 
   fetch(fullUrl, {

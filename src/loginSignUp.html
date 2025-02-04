@@ -6,7 +6,7 @@
     <title>Social Loafers</title>
     <link rel="stylesheet" href="./output.css" />
   </head>
-  <body class="bg-background text-text overflow-auto">
+  <body class="bg-gradient-to-b from-background to-[#4f2a0b] text-text overflow-auto">
     <nav class="bg-secondary">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -62,13 +62,13 @@
               <div class="flex space-x-4">
                 <a
                   href="./loginSignUp.html"
-                  class="rounded-md hover:bg-primary hover:text-background px-3 py-2 text-lg font-semibold"
+                  class="rounded-md hover:bg-primary hover:text-background px-3 py-2 text-lg font-semibold transition duration-300"
                 >
                   Login/Sign-up
                 </a>
                 <a
                   href="https://github.com/mmamdouh4370/G17-SmallProject"
-                  class="rounded-md px-3 py-2 text-lg font-semibold text-text hover:bg-primary hover:text-background"
+                  class="rounded-md px-3 py-2 text-lg font-semibold text-text hover:bg-primary hover:text-background transition duration-300"
                 >
                   Github
                 </a>
@@ -82,13 +82,13 @@
         <div class="space-y-1 px-2 pb-3 pt-2">
           <a
             href="./loginSignUp.html"
-            class="block rounded-md hover:bg-primary hover:text-background px-3 py-2 text-base font-medium"
+            class="block rounded-md hover:bg-primary hover:text-background px-3 py-2 text-base font-medium transition duration-300"
           >
             Login/Sign-up
           </a>
           <a
             href="https://github.com/mmamdouh4370/G17-SmallProject"
-            class="block rounded-md px-3 py-2 text-base font-medium text-text hover:bg-primary hover:text-background"
+            class="block rounded-md px-3 py-2 text-base font-medium text-text hover:bg-primary hover:text-background transition duration-300"
           >
             Github
           </a>
@@ -96,7 +96,7 @@
       </div>
     </nav>
     <section class="min-h-screen flex items-center justify-center">
-      <div id="form-container" class="bg-primary overflow-y-auto rounded-lg shadow-lg p-8 h-[42rem] w-[30rem] mt-[3rem] drop-shadow-md">
+      <div id="form-container" class="bg-primary overflow-y-auto rounded-lg shadow-lg p-8 h-[42rem] w-[30rem] -mt-[3rem] drop-shadow-md">
         <form id="create-account-form" class="space-y-4 active" onSubmit="register(event)">
           <h2 class="text-2xl mt-2 mb-8 text-alttext font-bold text-center">Create Your Account</h2>
           <div class="space-y-1">
@@ -225,7 +225,7 @@
           class="mt-6 w-full bg-secondary/90 hover:bg-secondary/70 px-4 py-2 font-semibold text-alttext rounded text-xl"
           onclick="toggleForm()"
         >
-          Don't have an account? Register
+          Already have an account? Login
         </button>
       </div>
     </section>
