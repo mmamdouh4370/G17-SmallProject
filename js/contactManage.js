@@ -259,7 +259,7 @@ function loadContacts() {
           console.log("In loadcontacts method, Contact ID: " + contact.ID);
           newRow.id = "row" + contact.ID; // Assuming 'id' is the unique identifier
           newRow.innerHTML = `
-    <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 firstName">${contact.FirstName}</td>
+    <td class="border-2 border-secondary bg-primary text-darkalt px-4 py-2 firstName">${contact.FirstName}</td>
     <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 lastName">${contact.LastName}</td>
     <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 email">${contact.Email}</td>
     <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 phone">${contact.Phone}</td>
