@@ -1,21 +1,22 @@
-const urlBase = "http://159.223.165.192/G17-SmallProject/LAMPAPI";
+const urlBase = "http://159.223.165.192/LAMPAPI";
 const ext = "php";
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log(1);
   checkLoginStatus();
 });
 
 function checkLoginStatus() {
   let cookies = document.cookie.split("; ");
   let userId = null;
-
+  console.log(cookies);
   cookies.forEach((cookie) => {
     let [name, value] = cookie.split("=");
     if (name === "userId") {
       userId = value;
     }
   });
-
+  console.log(userId)
   if (userId && userId !== "undefined") {
     window.location.href = "contacts.html";
   }
