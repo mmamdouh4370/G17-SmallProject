@@ -1,4 +1,4 @@
-const urlBase = "http://159.223.165.192/LAMPAPI";
+const urlBase = "http://socialoafers.org/LAMPAPI";
 const ext = "php";
 
 document.addEventListener("DOMContentLoaded", function () {
