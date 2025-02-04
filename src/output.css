@@ -1136,6 +1136,16 @@ video {
   color: rgb(229 205 174 / 0.8);
 }
 
+.placeholder\:text-text::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(229 205 174 / var(--tw-text-opacity, 1));
+}
+
+.placeholder\:text-text::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(229 205 174 / var(--tw-text-opacity, 1));
+}
+
 .hover\:bg-blue-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));
