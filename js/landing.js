@@ -1,42 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const getStartedButton = document.querySelector(
-    "a[href='./loginSignUp.html']"
-  );
-  const navbarAuthButton = document.querySelector(
-    "a[href='./loginSignUp.html']"
-  );
-
-  if (isUserLoggedIn()) {
-    navbarAuthButton.textContent = "Logout";
-    navbarAuthButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      logoutUser();
-    });
-  }
-
-  getStartedButton.addEventListener("click", function (event) {
+    const getStartedButton = document.getElementById("getStart");
+    const navbarAuthButton = document.getElementById("loginSignUpButton");
+  
     if (isUserLoggedIn()) {
-      event.preventDefault();
-      window.location.href = "./contacts.html";
+      navbarAuthButton.textContent = "Logout";
+      navbarAuthButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        logoutUser();
+      });
     }
+  
+    getStartedButton.addEventListener("click", function (event) {
+      if (isUserLoggedIn()) {
+        event.preventDefault();
+        window.location.href = "./contacts.html";
+      }
+    });
   });
-});
-
-function isUserLoggedIn() {
-  const cookies = document.cookie.split(";");
-  for (let cookie of cookies) {
-    let [name, value] = cookie.trim().split("=");
-    if (name === "userId" && value) {
+  
+  function isUserLoggedIn() {
+    let cookies = document.cookie.split("; ");
+    let firstName = null;
+    console.log(cookies);
+  
+    cookies.forEach((cookie) => {
+      if (cookie.startsWith("firstName=")) {
+        firstName = cookie.split("=")[1];
+      }
+    });
+  
+    console.log(firstName);
+  
+    if (firstName) {
       return true;
+    } else {
+      return false;
     }
   }
-  return false;
-}
-
-function logoutUser() {
-  document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  document.cookie =
-    "firstName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  window.location.href = "./index.html";
-}
+  
+  function logoutUser() {
+    document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "firstName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "./index.html";
+  }
+  

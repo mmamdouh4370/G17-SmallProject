@@ -8,16 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function checkLoginStatus() {
   let cookies = document.cookie.split("; ");
-  let userId = null;
+  let firstName = null;
   console.log(cookies);
+
   cookies.forEach((cookie) => {
-    let [name, value] = cookie.split("=");
-    if (name === "userId") {
-      userId = value;
+    if (cookie.startsWith("firstName=")) {
+      firstName = cookie.split("=")[1];
     }
   });
-  console.log(userId)
-  if (userId && userId !== "undefined") {
+
+  console.log(firstName);
+
+  if (firstName) {
     window.location.href = "contacts.html";
   }
 }
