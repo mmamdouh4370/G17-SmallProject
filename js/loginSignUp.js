@@ -41,8 +41,8 @@ function toggleForm() {
     formContainer.classList.remove("h-[42rem]");
     formContainer.classList.add("h-[32rem]");
 
-    formContainer.classList.remove("-mt-[3rem]");
-    formContainer.classList.add("-mt-[13rem]");
+    // formContainer.classList.remove("-mt-[3rem]");
+    // formContainer.classList.add("-mt-[13rem]");
   } else {
     loginForm.classList.remove("active");
     loginForm.classList.add("hidden");
@@ -55,8 +55,8 @@ function toggleForm() {
     formContainer.classList.remove("h-[32rem]");
     formContainer.classList.add("h-[42rem]");
 
-    formContainer.classList.remove("-mt-[13rem]");
-    formContainer.classList.add("-mt-[3rem]");
+    // formContainer.classList.remove("-mt-[13rem]");
+    // formContainer.classList.add("-mt-[3rem]");
   }
 }
 
