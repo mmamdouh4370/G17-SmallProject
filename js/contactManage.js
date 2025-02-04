@@ -260,10 +260,10 @@ function loadContacts() {
           newRow.id = "row" + contact.ID; // Assuming 'id' is the unique identifier
           newRow.innerHTML = `
     <td class="border-2 border-secondary bg-primary text-darkalt px-4 py-2 firstName">${contact.FirstName}</td>
-    <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 lastName">${contact.LastName}</td>
-    <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 email">${contact.Email}</td>
-    <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2 phone">${contact.Phone}</td>
-    <td class="border-2 border-secondary bg-primary text-alttext px-4 py-2">
+    <td class="border-2 border-secondary bg-primary text-darkalt px-4 py-2 lastName">${contact.LastName}</td>
+    <td class="border-2 border-secondary bg-primary text-darkalt px-4 py-2 email">${contact.Email}</td>
+    <td class="border-2 border-secondary bg-primary text-darkalt px-4 py-2 phone">${contact.Phone}</td>
+    <td class="border-2 border-secondary bg-primary text-darkalt px-4 py-2">
         <button id="editBtn${contact.ID}" class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2" onclick="editContact(${contact.ID})">Edit</button>
         <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onclick="deleteContact(${contact.ID})">Delete</button>
     </td>
