@@ -7,11 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const navbarAuthButton = document.getElementById("loginSignUpButton");
 
   if (isUserLoggedIn()) {
+    console.log(2);
     navbarAuthButton.textContent = "Logout";
     navbarAuthButton.addEventListener("click", function (event) {
       event.preventDefault();
       logoutUser();
     });
+  } else {
+    console.log(2);
   }
     
 });
