@@ -4,18 +4,16 @@ document.addEventListener("DOMContentLoaded", function () {
   
     if (isUserLoggedIn()) {
       navbarAuthButton.textContent = "Logout";
+      getStartedButton.textContent = "Go to Contacts";
+      getStartedButton.href = "./contacts.html";
       navbarAuthButton.addEventListener("click", function (event) {
         event.preventDefault();
         logoutUser();
       });
+    } else {
+        getStartedButton.textContent = "Get Started";
+        getStartedButton.href = "./loginSignUp.html";
     }
-  
-    getStartedButton.addEventListener("click", function (event) {
-      if (isUserLoggedIn()) {
-        event.preventDefault();
-        window.location.href = "./contacts.html";
-      }
-    });
   });
   
   function isUserLoggedIn() {
