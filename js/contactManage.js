@@ -3,9 +3,7 @@ const ext = "php";
 
 document.addEventListener("DOMContentLoaded", function () {
   loadContacts();
-});
 
-document.addEventListener("DOMContentLoaded", function () {
   const navbarAuthButton = document.getElementById("loginSignUpButton");
 
   if (isUserLoggedIn()) {
@@ -15,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       logoutUser();
     });
   }
+    
 });
 
 function isUserLoggedIn() {
