@@ -6,37 +6,44 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const navbarAuthButton = document.querySelector(
-      "a[href='./loginSignUp.html']"
-    );
-  
-    if (isUserLoggedIn()) {
-      navbarAuthButton.textContent = "Logout";
-      navbarAuthButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        logoutUser();
-      });
+  const navbarAuthButton = document.getElementById("loginSignUpButton");
+
+  if (isUserLoggedIn()) {
+    navbarAuthButton.textContent = "Logout";
+    navbarAuthButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      logoutUser();
+    });
+  }
+});
+
+function isUserLoggedIn() {
+  let cookies = document.cookie.split("; ");
+  let firstName = null;
+  console.log(cookies);
+
+  cookies.forEach((cookie) => {
+    if (cookie.startsWith("firstName=")) {
+      firstName = cookie.split("=")[1];
     }
   });
-  
-  function isUserLoggedIn() {
-    const cookies = document.cookie.split(";");
-    for (let cookie of cookies) {
-      let [name, value] = cookie.trim().split("=");
-      if (name === "userId" && value) {
-        return true;
-      }
-    }
+
+  console.log(firstName);
+
+  if (firstName) {
+    return true;
+  } else {
     return false;
   }
-  
-  function logoutUser() {
-    document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie =
-      "firstName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.href = "./index.html";
-  }
+}
+
+function logoutUser() {
+  document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie =
+    "firstName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "lastName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  window.location.href = "./index.html";
+}
 
 function getUserIdFromCookie() {
   let cookies = document.cookie.split("; ");
