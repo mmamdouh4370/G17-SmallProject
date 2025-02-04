@@ -2,8 +2,6 @@ const urlBase = "http://159.223.165.192/LAMPAPI";
 const ext = "php";
 
 document.addEventListener("DOMContentLoaded", function () {
-  loadContacts();
-
   const navbarAuthButton = document.getElementById("loginSignUpButton");
 
   if (isUserLoggedIn()) {
@@ -14,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
       logoutUser();
     });
   } else {
-    console.log(2);
+    console.log(3);
   }
+
+  loadContacts();
     
 });
 
