@@ -1,6 +1,6 @@
 # Social Loafers
 
-[a lamp stack contact manager webapp for Dr. Leinecker's POOSD course](http://159.223.165.192/G17-SmallProject/src)
+[a lamp stack contact manager webapp for Dr. Leinecker's POOSD course](http://socialoafers.org/)
 
 ## Contributors
 
